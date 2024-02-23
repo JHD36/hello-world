@@ -1,6 +1,7 @@
 /*
   Blink
 JAY SUGGS
+Jonah Belback
 
   Turns an LED on for one second, then off for one second, repeatedly.
 
