@@ -52,8 +52,10 @@ void playerwin(int player)
     noTone(buzzer);
     delay(50);
     lcd.setCursor(0,0);
-    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
-    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
+    if (player == 1){lcd.print("    PLAYER 1    ");}
+    if (player == 2){lcd.print("    PLAYER 2    ");}
+    lcd.setCursor(6,1);
+    lcd.print("WINS");
     
     tone(buzzer, NOTE_G3,0);//G3
     delay(250);
@@ -66,8 +68,10 @@ void playerwin(int player)
     noTone(buzzer);
     delay(50);
     lcd.setCursor(0,0);
-    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
-    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
+    if (player == 1){lcd.print("    PLAYER 1    ");}
+    if (player == 2){lcd.print("    PLAYER 2    ");}
+    lcd.setCursor(6,1);
+    lcd.print("WINS");
     
     tone(buzzer, NOTE_G3,0);//G3
     delay(250);
@@ -80,8 +84,10 @@ void playerwin(int player)
     noTone(buzzer);
     delay(100);
     lcd.setCursor(0,0);
-    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
-    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
+    if (player == 1){lcd.print("    PLAYER 1    ");}
+    if (player == 2){lcd.print("    PLAYER 2    ");}
+    lcd.setCursor(6,1);
+    lcd.print("WINS");
 
     tone(buzzer, NOTE_C4,0);//C4
     delay(400);
