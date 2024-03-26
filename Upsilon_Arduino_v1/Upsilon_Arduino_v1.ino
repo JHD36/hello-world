@@ -46,14 +46,14 @@ void playerwin(int player)
     lcd.clear();
     reset();*/
     lcd.clear();
-    lcd.setCursor(0,0);
 
     tone(buzzer, NOTE_C4,0);//C4
     delay(200);
     noTone(buzzer);
     delay(50);
-    if (player = 1){lcd.print("PLAYER 1 WINS");}
-    if (player = 2){lcd.print("PLAYER 2 WINS");}
+    lcd.setCursor(0,0);
+    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
+    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
     
     tone(buzzer, NOTE_G3,0);//G3
     delay(250);
@@ -65,8 +65,9 @@ void playerwin(int player)
     delay(200);
     noTone(buzzer);
     delay(50);
-    if (player = 1){lcd.print("PLAYER 1 WINS");}
-    if (player = 2){lcd.print("PLAYER 2 WINS");}
+    lcd.setCursor(0,0);
+    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
+    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
     
     tone(buzzer, NOTE_G3,0);//G3
     delay(250);
@@ -78,8 +79,9 @@ void playerwin(int player)
     delay(400);
     noTone(buzzer);
     delay(100);
-    if (player = 1){lcd.print("PLAYER 1 WINS");}
-    if (player = 2){lcd.print("PLAYER 2 WINS");}
+    lcd.setCursor(0,0);
+    if (player == 1){lcd.print(" PLAYER 1 WINS  ");}
+    if (player == 2){lcd.print(" PLAYER 2 WINS  ");}
 
     tone(buzzer, NOTE_C4,0);//C4
     delay(400);
@@ -111,8 +113,9 @@ void fail()
     noTone(buzzer);
     delay(3000);
 
-    if (score1 > score2+winover){playerwin(1);}
-    else if (score2 > score1+winover){playerwin(2);}
+    if (score1 >= score2+winover){playerwin(1);}
+    else
+    if (score2 >= score1+winover){playerwin(2);}
     else
     {
         lcd.clear();
@@ -212,13 +215,17 @@ int selection=0;
 float curr_time,time_to_complete;
 void start_func()
 {
+    //curr_time = millis();//time modules start
+    //time_to_complete *= 0.909; //time to complete gets 10% faster
+    //selection = rand()%4; //rand value 0to3 (which module)
+
+    tone(buzzer, NOTE_C4,0);//G3
+    delay(250);
+    noTone(buzzer);
+
     curr_time = millis();//time modules start
     time_to_complete *= 0.909; //time to complete gets 10% faster
     selection = rand()%4; //rand value 0to3 (which module)
-
-    tone(buzzer, NOTE_G3,0);//G3
-    delay(250);
-    noTone(buzzer);
 }
 
 
@@ -232,11 +239,12 @@ void setup(){
     lcd.backlight();
     score_disp();
   
-    float time_to_complete = 5000;//5sec in ms
+    time_to_complete = 5000;//5sec in ms
     score1=0,score2=0;
 
     delay(2000);
     buzzer_start();
+    delay(2000);
 }
 
 
@@ -245,6 +253,8 @@ bool Player2_prev = false;
 
 void loop() {
     //ROUND STARTS
+    start_func();
+
 
 
     //stab
@@ -253,7 +263,7 @@ void loop() {
         //set output pins as 00 (OPin2,OPin1)
         digitalWrite(OPin1, LOW);
         digitalWrite(OPin2, LOW);
-        start_func();
+        //start_func();
 
         //MODULE STARTS
         //complete if circuit is complete
@@ -261,12 +271,12 @@ void loop() {
         {
             if (digitalRead(state1) == HIGH)
             {
-                score1 += 1;
+                score1++;
                 break;
             }
             else if (digitalRead(state2) == HIGH)
             {
-                score2 += 1;
+                score2++;
                 break;
             }
             else if (millis() >= curr_time + time_to_complete)
@@ -282,7 +292,7 @@ void loop() {
     {   //set output pins as 01 (OPin2,OPin1)
         digitalWrite(OPin1, HIGH);
         digitalWrite(OPin2, LOW);
-        start_func();
+        //start_func();
 
         //MODULE STARTS
         //complete if circuit is complete
@@ -290,12 +300,12 @@ void loop() {
         {
             if (digitalRead(state1) == HIGH)
             {
-                score1 += 1;
+                score1++;
                 break;
             }
             else if (digitalRead(state2) == HIGH)
             {
-                score2 += 1;
+                score2++;
                 break;
             }
             else if (millis() >= curr_time + time_to_complete)
@@ -316,7 +326,7 @@ void loop() {
         //set output pins as 10 (OPin2,OPin1)
         digitalWrite(OPin1, LOW);
         digitalWrite(OPin2, HIGH);
-        start_func();
+        //start_func();
         
         //MODULE STARTS
         //complete if circuit is different then inital
@@ -326,12 +336,12 @@ void loop() {
             //state changed
             if (digitalRead(state1) != Player1_prev)
             {
-                score1 += 1;
+                score1++;
                 break;
             }
             else if (digitalRead(state2) != Player2_prev)
             {
-                score2 += 1;
+                score2++;
                 break;
             }
             else if (millis() >= curr_time + time_to_complete)
@@ -349,7 +359,7 @@ void loop() {
         //set output pins as 11 (OPin2,OPin1)
         digitalWrite(OPin1, HIGH);
         digitalWrite(OPin2, HIGH);
-        start_func();
+        //start_func();
         
         //MODULE STARTS
         //complete if circuit is complete
@@ -357,12 +367,12 @@ void loop() {
         {
             if (digitalRead(state1) == HIGH)
             {
-                score1 += 1;
+                score1++;
                 break;
             }
             else if (digitalRead(state2) == HIGH)
             {
-                score2 += 1;
+                score2++;
                 break;
             }
             else if (millis() >= curr_time + time_to_complete)
